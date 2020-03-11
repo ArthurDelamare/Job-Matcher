@@ -23,6 +23,7 @@ class TestProject(unittest.TestCase):
 
         self.assertEqual(resume_text, resume.text)
         self.assertEqual(resume.doc[1].text, 'Name')
+        self.assertEqual(resume.keywords[0], 'CMS')
 
 if __name__ == "__main__":
     unittest.main()
