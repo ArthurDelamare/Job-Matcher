@@ -1,6 +1,5 @@
 import spacy
-from keyword import Keyword
-from typing import List
+from .keyword import Keyword
 
 class Resume:
 
@@ -12,11 +11,11 @@ class Resume:
         self.doc = nlp(text)
         self.keywords = self._extract_keywords_from_doc()
 
-    def _extract_keywords_from_doc(self) -> List[Keyword]:
+    def _extract_keywords_from_doc(self) -> dict:
         tokens = [token for token in self.doc if not token.is_stop and token.pos_ not in ['X', 'PUNCT', 'SPACE', 'SYM', 'CCONJ', 'NUM', 'ADJ', 'ADV', 'VERB'] and token.text not in ['-', '|', '•']]
-        tokens_with_context: List[Keyword] = list()
+        tokens_with_context = dict()
         for token in tokens:
             for chunk in self.doc.noun_chunks:
                 if token in chunk:
-                    tokens_with_context.append(Keyword(value=token.text, context=chunk))
+                    tokens_with_context[token.text] = chunk
         return tokens_with_context

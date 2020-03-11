@@ -1,5 +1,5 @@
 import unittest
-from resume import Resume
+from .resume import Resume
 
 class TestProject(unittest.TestCase):
 
@@ -23,7 +23,7 @@ class TestProject(unittest.TestCase):
 
         self.assertEqual(resume_text, resume.text)
         self.assertEqual(resume.doc[1].text, 'Name')
-        self.assertEqual(resume.keywords[0], 'CMS')
+        self.assertEqual(resume.keywords['CMS'].text, 'Random CMS Company')
 
 if __name__ == "__main__":
     unittest.main()
