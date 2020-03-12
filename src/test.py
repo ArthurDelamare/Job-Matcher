@@ -1,5 +1,6 @@
 import unittest
 from .resume import Resume
+from .options import Options
 
 class TestProject(unittest.TestCase):
 
@@ -19,11 +20,14 @@ class TestProject(unittest.TestCase):
 
             2016 - 2018 : Frontend Developer at Random CMS Company
         '''
-        resume = Resume(resume_text)
+        options = Options(['Python', 'JavaScript', 'Agile', 'TypeScript', 'Java', 'Docker'])
 
-        self.assertEqual(resume_text, resume.text)
+        resume = Resume(text = resume_text, options = options)
+
+        self.assertEqual(resume.text, resume_text)
         self.assertEqual(resume.doc[1].text, 'Name')
         self.assertEqual(resume.keywords['CMS'].text, 'Random CMS Company')
+        self.assertEqual(resume.domains_keywords, ['Java', 'Python', 'JavaScript', 'TypeScript'])
 
 if __name__ == "__main__":
     unittest.main()
