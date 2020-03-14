@@ -55,6 +55,21 @@ class Education(Section):
             entity = Span(doc, start, end, label=Education.label)
             doc.ents += (entity,)
 
+class Experience(Section):
+
+    title = 'Experience' # Section title is required by Spacy to use the matcher
+
+    label = 'EXPERIENCE'
+
+    @staticmethod
+    def is_header(matcher: Matcher, doc: Doc, i: int, matches: List[tuple]):
+        ''' callback when a experience keyword is found: check if the experience keyword is a experience header '''
+
+        _, start, end = matches[i]
+        if ('\n\n' in doc[start-3 : start].text.replace(" ", "") and '\n' in doc[start : start+3].text):
+            entity = Span(doc, start, end, label=Experience.label)
+            doc.ents += (entity,)
+
 class Skills(Section):
 
     title = 'Skills' # Section title is required by Spacy to use the matcher
