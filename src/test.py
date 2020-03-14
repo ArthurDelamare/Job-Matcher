@@ -20,7 +20,7 @@ class TestProject(unittest.TestCase):
 
             2016 - 2018 : Frontend Developer at Random CMS Company
         '''
-        options = Options(['Python', 'JavaScript', 'Agile', 'TypeScript', 'Java', 'Docker'])
+        options = Options(domain_keywords = ['Python', 'JavaScript', 'Agile', 'TypeScript', 'Java', 'Docker'], sections = True)
 
         resume = Resume(text = resume_text, options = options)
 

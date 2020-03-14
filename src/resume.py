@@ -1,9 +1,12 @@
 import spacy
+from spacy.matcher import Matcher
 from .keyword import Keyword
 from .options import Options
+from .sections import Certificate, Education, Skills
+
 class Resume:
 
-    def __init__(self, text: str, model = 'en_core_web_sm', options = Options()):
+    def __init__(self, text: str, language = 'en', model = 'en_core_web_sm', options = Options()):
         # Save initial text
         self.text = text
         self.options = options 
@@ -16,6 +19,21 @@ class Resume:
         self.keywords = self._extract_keywords_from_doc()
         if self.options.domain_keywords:
             self.domains_keywords = self._extract_domain_keywords_from_keywords()
+
+        if self.options.sections:
+            self.sections = {}
+            matcher = Matcher(nlp.vocab)
+            matcher.add(Certificate.title, Certificate.is_header, Certificate.get_pattern(language, 'certificate'))
+            matcher.add(Education.title, Education.is_header, Education.get_pattern(language, 'education'))
+            matcher.add(Skills.title, Skills.is_header, Skills.get_pattern(language, 'skills'))
+            matcher(self.doc)
+
+            for ent in self.doc.ents:
+                if ent.label_ in [Certificate.label, Education.label, 'EXP', Skills.label, 'SUM', 'VOL']:
+                    self.sections[ent.text.lower()] = {'text': ent.text, 'start': ent.start_char, 'end': ent.end_char}
+
+        
+
 
     def _extract_keywords_from_doc(self) -> dict:
         ''' Extract the keywords from the spacy doc by removing unwanted tokens as punctuations, symbols, spaces... '''
