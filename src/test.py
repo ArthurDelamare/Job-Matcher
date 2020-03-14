@@ -8,6 +8,9 @@ class TestProject(unittest.TestCase):
         resume_text = '''
             Name : John Doe
             Title : Software Engineer
+
+            Summary :
+            My name is John Doe, I am software engineer with 3 years experience. Especially comfortable in web development, I'm open to job offers.
             
             Skills : 
             Java, Python, Php, JavaScript, TypeScript, Golang

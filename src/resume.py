@@ -2,7 +2,7 @@ import spacy
 from spacy.matcher import Matcher
 from .keyword import Keyword
 from .options import Options
-from .sections import Certificate, Education, Experience, Skills
+from .sections import Certificate, Education, Experience, Skills, Summary
 
 class Resume:
 
@@ -25,12 +25,13 @@ class Resume:
             matcher = Matcher(nlp.vocab)
             matcher.add(Certificate.title, Certificate.is_header, Certificate.get_pattern(language, 'certificate'))
             matcher.add(Education.title, Education.is_header, Education.get_pattern(language, 'education'))
-            matcher.add(Skills.title, Skills.is_header, Skills.get_pattern(language, 'skills'))
             matcher.add(Experience.label, Experience.is_header, Experience.get_pattern(language, 'experience'))
+            matcher.add(Skills.title, Skills.is_header, Skills.get_pattern(language, 'skills'))
+            matcher.add(Summary.title, Summary.is_header, Summary.get_pattern(language, 'summary'))
             matcher(self.doc)
 
             for ent in self.doc.ents:
-                if ent.label_ in [Certificate.label, Education.label, Experience.label, Skills.label, 'SUM', 'VOL']:
+                if ent.label_ in [Certificate.label, Education.label, Experience.label, Skills.label, Summary.label, 'VOL']:
                     self.sections[ent.text.lower()] = {'text': ent.text, 'start': ent.start_char, 'end': ent.end_char}
 
         
