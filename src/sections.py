@@ -99,3 +99,18 @@ class Summary(Section):
         if ('\n\n' in doc[start-3 : start].text.replace(" ", "") and '\n' in doc[start : start+3].text):
             entity = Span(doc, start, end, label=Summary.label)
             doc.ents += (entity,)
+
+class Volunteering(Section):
+
+    title = 'Volunteering' # Section title is required by Spacy to use the matcher
+
+    label = 'VOLUNTEERING'
+
+    @staticmethod
+    def is_header(matcher: Matcher, doc: Doc, i: int, matches: List[tuple]):
+        ''' callback when a volunteering keyword is found: check if the volunteering keyword is a volunteering header '''
+
+        _, start, end = matches[i]
+        if ('\n\n' in doc[start-3 : start].text.replace(" ", "") and '\n' in doc[start : start+3].text):
+            entity = Span(doc, start, end, label=Volunteering.label)
+            doc.ents += (entity,)

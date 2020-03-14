@@ -2,7 +2,7 @@ import spacy
 from spacy.matcher import Matcher
 from .keyword import Keyword
 from .options import Options
-from .sections import Certificate, Education, Experience, Skills, Summary
+from .sections import Certificate, Education, Experience, Skills, Summary, Volunteering
 
 class Resume:
 
@@ -28,10 +28,11 @@ class Resume:
             matcher.add(Experience.label, Experience.is_header, Experience.get_pattern(language, 'experience'))
             matcher.add(Skills.title, Skills.is_header, Skills.get_pattern(language, 'skills'))
             matcher.add(Summary.title, Summary.is_header, Summary.get_pattern(language, 'summary'))
+            matcher.add(Volunteering.title, Volunteering.is_header, Volunteering.get_pattern(language, 'volunteering'))
             matcher(self.doc)
 
             for ent in self.doc.ents:
-                if ent.label_ in [Certificate.label, Education.label, Experience.label, Skills.label, Summary.label, 'VOL']:
+                if ent.label_ in [Certificate.label, Education.label, Experience.label, Skills.label, Summary.label, Volunteering.label]:
                     self.sections[ent.text.lower()] = {'text': ent.text, 'start': ent.start_char, 'end': ent.end_char}
 
         

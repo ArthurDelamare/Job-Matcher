@@ -22,6 +22,9 @@ class TestProject(unittest.TestCase):
             2018 - Now : Software Engineer at My Dream Company
 
             2016 - 2018 : Frontend Developer at Random CMS Company
+
+            Volunteering :
+            2017 - Now : Equal right activist
         '''
         options = Options(domain_keywords = ['Python', 'JavaScript', 'Agile', 'TypeScript', 'Java', 'Docker'], sections = True)
 
