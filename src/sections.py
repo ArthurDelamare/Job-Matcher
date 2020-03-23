@@ -152,6 +152,16 @@ class Volunteering(Section):
 
     name = 'Volunteering' # Section title is required by Spacy to use the matcher
 
+    keywords = {
+        'en': ['volunteer', 'volunteering', 'charity'],
+    }
+
+    @staticmethod
+    def get_pattern(language: str):
+        ''' Pattern to detect the volunteering header of the volunteering section '''
+    
+        return [{"LOWER": {"IN" : Volunteering.keywords[language]}}]
+
     @staticmethod
     def is_header(matcher: Matcher, doc: Doc, i: int, matches: List[tuple]):
         ''' callback when a volunteering keyword is found: check if the volunteering keyword is a volunteering header '''
@@ -159,4 +169,27 @@ class Volunteering(Section):
         _, start, end = matches[i]
         if ('\n\n' in doc[start-3 : start].text.replace(" ", "") and '\n' in doc[start : start+3].text):
             entity = Span(doc, start, end, label=Volunteering.name)
+            doc.ents += (entity,)
+
+class Requirements:
+
+    name = 'Requirements' # Section title is required by Spacy to use the matcher
+
+    keywords = {
+        'en': ['requirements'],
+    }
+
+    @staticmethod
+    def get_pattern(language: str):
+        ''' Pattern to detect the requirements header of the requirements section '''
+    
+        return [{"LOWER": {"IN" : Volunteering.keywords[language]}}]
+
+    @staticmethod
+    def is_header(matcher: Matcher, doc: Doc, i: int, matches: List[tuple]):
+        ''' callback when a requirements keyword is found: check if the requirements keyword is a requirements header '''
+
+        _, start, end = matches[i]
+        if ('\n\n' in doc[start-3 : start].text.replace(" ", "") and '\n' in doc[start : start+3].text):
+            entity = Span(doc, start, end, label=Requirements.name)
             doc.ents += (entity,)

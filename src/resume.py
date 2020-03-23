@@ -28,7 +28,7 @@ class Resume:
             matcher.add(Experience.name, Experience.is_header, Experience.get_pattern(language))
             matcher.add(Skills.name, Skills.is_header, Skills.get_pattern(language))
             matcher.add(Summary.name, Summary.is_header, Summary.get_pattern(language))
-            matcher.add(Volunteering.name, Volunteering.is_header, Volunteering.get_pattern(language, 'volunteering'))
+            matcher.add(Volunteering.name, Volunteering.is_header, Volunteering.get_pattern(language))
             matcher(self.doc)
 
             for ent in self.doc.ents:
