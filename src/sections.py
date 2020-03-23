@@ -27,9 +27,7 @@ class Section:
 
 class Certificate(Section):
 
-    title = 'Certificate' # Section title is required by Spacy to use the matcher
-
-    label = 'CERTIFICATE'
+    name = 'Certificate' # Section title is required by Spacy to use the matcher
 
     @staticmethod
     def is_header(matcher: Matcher, doc: Doc, i: int, matches: List[tuple]):
@@ -37,14 +35,12 @@ class Certificate(Section):
 
         _, start, end = matches[i]
         if ('\n\n' in doc[start-3 : start].text.replace(" ", "") and '\n' in doc[start : start+3].text):
-            entity = Span(doc, start, end, label=Certificate.label)
+            entity = Span(doc, start, end, label=Certificate.name)
             doc.ents += (entity,)
 
 class Education(Section):
 
-    title = 'Education' # Section title is required by Spacy to use the matcher
-
-    label = 'EDUCATION'
+    name = 'Education' # Section title is required by Spacy to use the matcher
 
     @staticmethod
     def is_header(matcher: Matcher, doc: Doc, i: int, matches: List[tuple]):
@@ -52,14 +48,12 @@ class Education(Section):
 
         _, start, end = matches[i]
         if ('\n\n' in doc[start-3 : start].text.replace(" ", "") and '\n' in doc[start : start+3].text):
-            entity = Span(doc, start, end, label=Education.label)
+            entity = Span(doc, start, end, label=Education.name)
             doc.ents += (entity,)
 
 class Experience(Section):
 
-    title = 'Experience' # Section title is required by Spacy to use the matcher
-
-    label = 'EXPERIENCE'
+    name = 'Experience' # Section title is required by Spacy to use the matcher
 
     @staticmethod
     def is_header(matcher: Matcher, doc: Doc, i: int, matches: List[tuple]):
@@ -67,14 +61,12 @@ class Experience(Section):
 
         _, start, end = matches[i]
         if ('\n\n' in doc[start-3 : start].text.replace(" ", "") and '\n' in doc[start : start+3].text):
-            entity = Span(doc, start, end, label=Experience.label)
+            entity = Span(doc, start, end, label=Experience.name)
             doc.ents += (entity,)
 
 class Skills(Section):
 
-    title = 'Skills' # Section title is required by Spacy to use the matcher
-
-    label = 'SKILLS'
+    name = 'Skills' # Section title is required by Spacy to use the matcher
 
     @staticmethod
     def is_header(matcher: Matcher, doc: Doc, i: int, matches: List[tuple]):
@@ -82,14 +74,12 @@ class Skills(Section):
 
         _, start, end = matches[i]
         if ('\n\n' in doc[start-3 : start].text.replace(" ", "") and '\n' in doc[start : start+3].text):
-            entity = Span(doc, start, end, label=Skills.label)
+            entity = Span(doc, start, end, label=Skills.name)
             doc.ents += (entity,)
 
 class Summary(Section):
 
-    title = 'Summary' # Section title is required by Spacy to use the matcher
-
-    label = 'SUMMARY'
+    name = 'Summary' # Section title is required by Spacy to use the matcher
 
     @staticmethod
     def is_header(matcher: Matcher, doc: Doc, i: int, matches: List[tuple]):
@@ -97,14 +87,12 @@ class Summary(Section):
 
         _, start, end = matches[i]
         if ('\n\n' in doc[start-3 : start].text.replace(" ", "") and '\n' in doc[start : start+3].text):
-            entity = Span(doc, start, end, label=Summary.label)
+            entity = Span(doc, start, end, label=Summary.name)
             doc.ents += (entity,)
 
 class Volunteering(Section):
 
-    title = 'Volunteering' # Section title is required by Spacy to use the matcher
-
-    label = 'VOLUNTEERING'
+    name = 'Volunteering' # Section title is required by Spacy to use the matcher
 
     @staticmethod
     def is_header(matcher: Matcher, doc: Doc, i: int, matches: List[tuple]):
@@ -112,5 +100,5 @@ class Volunteering(Section):
 
         _, start, end = matches[i]
         if ('\n\n' in doc[start-3 : start].text.replace(" ", "") and '\n' in doc[start : start+3].text):
-            entity = Span(doc, start, end, label=Volunteering.label)
+            entity = Span(doc, start, end, label=Volunteering.name)
             doc.ents += (entity,)

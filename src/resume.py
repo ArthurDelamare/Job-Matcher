@@ -23,16 +23,16 @@ class Resume:
         if self.options.sections:
             self.sections = {}
             matcher = Matcher(nlp.vocab)
-            matcher.add(Certificate.title, Certificate.is_header, Certificate.get_pattern(language, 'certificate'))
-            matcher.add(Education.title, Education.is_header, Education.get_pattern(language, 'education'))
-            matcher.add(Experience.label, Experience.is_header, Experience.get_pattern(language, 'experience'))
-            matcher.add(Skills.title, Skills.is_header, Skills.get_pattern(language, 'skills'))
-            matcher.add(Summary.title, Summary.is_header, Summary.get_pattern(language, 'summary'))
-            matcher.add(Volunteering.title, Volunteering.is_header, Volunteering.get_pattern(language, 'volunteering'))
+            matcher.add(Certificate.name, Certificate.is_header, Certificate.get_pattern(language, 'certificate'))
+            matcher.add(Education.name, Education.is_header, Education.get_pattern(language, 'education'))
+            matcher.add(Experience.name, Experience.is_header, Experience.get_pattern(language, 'experience'))
+            matcher.add(Skills.name, Skills.is_header, Skills.get_pattern(language, 'skills'))
+            matcher.add(Summary.name, Summary.is_header, Summary.get_pattern(language, 'summary'))
+            matcher.add(Volunteering.name, Volunteering.is_header, Volunteering.get_pattern(language, 'volunteering'))
             matcher(self.doc)
 
             for ent in self.doc.ents:
-                if ent.label_ in [Certificate.label, Education.label, Experience.label, Skills.label, Summary.label, Volunteering.label]:
+                if ent.label_ in [Certificate.name, Education.name, Experience.name, Skills.name, Summary.name, Volunteering.name]:
                     self.sections[ent.text.lower()] = {'text': ent.text, 'start': ent.start_char, 'end': ent.end_char}
 
         
