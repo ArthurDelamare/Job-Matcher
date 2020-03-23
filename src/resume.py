@@ -23,8 +23,8 @@ class Resume:
         if self.options.sections:
             self.sections = {}
             matcher = Matcher(nlp.vocab)
-            matcher.add(Certificate.name, Certificate.is_header, Certificate.get_pattern(language, 'certificate'))
-            matcher.add(Education.name, Education.is_header, Education.get_pattern(language, 'education'))
+            matcher.add(Certificate.name, Certificate.is_header, Certificate.get_pattern(language))
+            matcher.add(Education.name, Education.is_header, Education.get_pattern(language))
             matcher.add(Experience.name, Experience.is_header, Experience.get_pattern(language, 'experience'))
             matcher.add(Skills.name, Skills.is_header, Skills.get_pattern(language, 'skills'))
             matcher.add(Summary.name, Summary.is_header, Summary.get_pattern(language, 'summary'))

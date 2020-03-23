@@ -21,13 +21,28 @@ class Section:
     @staticmethod
     def get_pattern(language: str, section: str):
         ''' Pattern to detect the experience header of the experience section '''
-
+    
         return [{"LOWER": {"IN" : Section.keywords[language][section]}}]
+
+    @staticmethod
+    def is_header(matcher: Matcher, doc: Doc, i: int, matches: List[tuple]):
+        ''' callback when a section keyword is found: check if the section keyword is a section header '''
+        pass
 
 
 class Certificate(Section):
 
     name = 'Certificate' # Section title is required by Spacy to use the matcher
+
+    keywords = {
+        'en': ['certificate', 'certificates', 'certifications'],
+    }
+
+    @staticmethod
+    def get_pattern(language: str):
+        ''' Pattern to detect the certificate header of the education section '''
+    
+        return [{"LOWER": {"IN" : Certificate.keywords[language]}}]
 
     @staticmethod
     def is_header(matcher: Matcher, doc: Doc, i: int, matches: List[tuple]):
@@ -40,7 +55,17 @@ class Certificate(Section):
 
 class Education(Section):
 
-    name = 'Education' # Section title is required by Spacy to use the matcher
+    name = 'Education'
+
+    keywords = {
+        'en': ['education'],
+    } 
+
+    @staticmethod
+    def get_pattern(language: str):
+        ''' Pattern to detect the education header of the education section '''
+    
+        return [{"LOWER": {"IN" : Education.keywords[language]}}]
 
     @staticmethod
     def is_header(matcher: Matcher, doc: Doc, i: int, matches: List[tuple]):
