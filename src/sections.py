@@ -129,6 +129,16 @@ class Summary(Section):
 
     name = 'Summary' # Section title is required by Spacy to use the matcher
 
+    keywords = {
+        'en': ['summary'],
+    }
+
+    @staticmethod
+    def get_pattern(language: str):
+        ''' Pattern to detect the summary header of the summary section '''
+    
+        return [{"LOWER": {"IN" : Summary.keywords[language]}}]
+
     @staticmethod
     def is_header(matcher: Matcher, doc: Doc, i: int, matches: List[tuple]):
         ''' callback when a summary keyword is found: check if the summary keyword is a summary header '''
