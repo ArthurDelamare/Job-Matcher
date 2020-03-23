@@ -193,3 +193,26 @@ class Requirements:
         if ('\n\n' in doc[start-3 : start].text.replace(" ", "") and '\n' in doc[start : start+3].text):
             entity = Span(doc, start, end, label=Requirements.name)
             doc.ents += (entity,)
+
+class Technologies:
+
+    name = 'Technologies' # Section title is required by Spacy to use the matcher
+
+    keywords = {
+        'en': ['tech', 'technologies'],
+    }
+
+    @staticmethod
+    def get_pattern(language: str):
+        ''' Pattern to detect the technologies header of the technologies section '''
+    
+        return [{"LOWER": {"IN" : Volunteering.keywords[language]}}]
+
+    @staticmethod
+    def is_header(matcher: Matcher, doc: Doc, i: int, matches: List[tuple]):
+        ''' callback when a technologies keyword is found: check if the technologies keyword is a technologies header '''
+
+        _, start, end = matches[i]
+        if ('\n\n' in doc[start-3 : start].text.replace(" ", "") and '\n' in doc[start : start+3].text):
+            entity = Span(doc, start, end, label=Technologies.name)
+            doc.ents += (entity,)
