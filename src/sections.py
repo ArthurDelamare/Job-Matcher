@@ -171,7 +171,30 @@ class Volunteering(Section):
             entity = Span(doc, start, end, label=Volunteering.name)
             doc.ents += (entity,)
 
-class Requirements:
+class Environment(Section):
+
+    name = 'Environment' # Section title is required by Spacy to use the matcher
+
+    keywords = {
+        'en': ['environment'],
+    }
+
+    @staticmethod
+    def get_pattern(language: str):
+        ''' Pattern to detect the environment header of the environment section '''
+    
+        return [{"LOWER": {"IN" : Volunteering.keywords[language]}}]
+
+    @staticmethod
+    def is_header(matcher: Matcher, doc: Doc, i: int, matches: List[tuple]):
+        ''' callback when a environment keyword is found: check if the environment keyword is a environment header '''
+
+        _, start, end = matches[i]
+        if ('\n\n' in doc[start-3 : start].text.replace(" ", "") and '\n' in doc[start : start+3].text):
+            entity = Span(doc, start, end, label=Environment.name)
+            doc.ents += (entity,)
+
+class Requirements(Section):
 
     name = 'Requirements' # Section title is required by Spacy to use the matcher
 
@@ -194,7 +217,7 @@ class Requirements:
             entity = Span(doc, start, end, label=Requirements.name)
             doc.ents += (entity,)
 
-class Technologies:
+class Technologies(Section):
 
     name = 'Technologies' # Section title is required by Spacy to use the matcher
 
