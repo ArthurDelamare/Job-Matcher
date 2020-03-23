@@ -4,28 +4,12 @@ from typing import List
 
 class Section:
 
-    name = 'undefined'
-
-    # Keywords to detect sections
-    keywords = {
-        'en': {
-            'certificate': ['certificate', 'certificates', 'certifications'],
-            'education': ['education'],
-            'environment': ['environment'],
-            'experience': ['experience', 'experiences'],
-            'requirements' : ['requirements'],
-            'skills': ['competencies', 'skills'],
-            'summary': ['summary'],
-            'technologies': ['tech', 'technologies'],
-            'volunteering': ['volunteer', 'volunteering', 'charity']
-        }
-    } 
+    name = 'undefined' 
     
     @staticmethod
-    def get_pattern(language: str, section: str):
+    def get_pattern(language: str):
         ''' Pattern to detect the experience header of the experience section '''
-    
-        return [{"LOWER": {"IN" : Section.keywords[language][section]}}]
+        pass
 
     @staticmethod
     def is_header(matcher: Matcher, doc: Doc, i: int, matches: List[tuple]):
