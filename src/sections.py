@@ -3,6 +3,9 @@ from spacy.tokens import Doc, Span
 from typing import List
 
 class Section:
+
+    name = 'undefined'
+
     # Keywords to detect sections
     keywords = {
         'en': {
@@ -79,6 +82,16 @@ class Education(Section):
 class Experience(Section):
 
     name = 'Experience' # Section title is required by Spacy to use the matcher
+
+    keywords = {
+        'en': ['experience', 'experiences'],
+    }
+
+    @staticmethod
+    def get_pattern(language: str):
+        ''' Pattern to detect the experience header of the experience section '''
+    
+        return [{"LOWER": {"IN" : Experience.keywords[language]}}]
 
     @staticmethod
     def is_header(matcher: Matcher, doc: Doc, i: int, matches: List[tuple]):
