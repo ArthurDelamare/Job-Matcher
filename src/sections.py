@@ -16,7 +16,6 @@ class Section:
         ''' callback when a section keyword is found: check if the section keyword is a section header '''
         pass
 
-
 class Certificate(Section):
 
     name = 'Certificate' # Section title is required by Spacy to use the matcher

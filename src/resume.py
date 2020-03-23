@@ -23,20 +23,13 @@ class Resume:
         if self.options.sections:
             self.sections = {}
             matcher = Matcher(nlp.vocab)
-            matcher.add(Certificate.name, Certificate.is_header, Certificate.get_pattern(language))
-            matcher.add(Education.name, Education.is_header, Education.get_pattern(language))
-            matcher.add(Experience.name, Experience.is_header, Experience.get_pattern(language))
-            matcher.add(Skills.name, Skills.is_header, Skills.get_pattern(language))
-            matcher.add(Summary.name, Summary.is_header, Summary.get_pattern(language))
-            matcher.add(Volunteering.name, Volunteering.is_header, Volunteering.get_pattern(language))
+            for section in self.options.sections:
+                matcher.add(section.name, section.is_header, section.get_pattern(language))
             matcher(self.doc)
 
             for ent in self.doc.ents:
                 if ent.label_ in [Certificate.name, Education.name, Experience.name, Skills.name, Summary.name, Volunteering.name]:
                     self.sections[ent.text.lower()] = {'text': ent.text, 'start': ent.start_char, 'end': ent.end_char}
-
-        
-
 
     def _extract_keywords_from_doc(self) -> dict:
         ''' Extract the keywords from the spacy doc by removing unwanted tokens as punctuations, symbols, spaces... '''

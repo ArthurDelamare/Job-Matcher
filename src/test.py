@@ -1,6 +1,8 @@
 import unittest
-from .resume import Resume
 from .options import Options
+from .resume import Resume
+from .sections import Certificate, Education, Experience, Skills, Summary, Volunteering
+
 
 class TestProject(unittest.TestCase):
 
@@ -26,7 +28,7 @@ class TestProject(unittest.TestCase):
             Volunteering :
             2017 - Now : Equal right activist
         '''
-        options = Options(domain_keywords = ['Python', 'JavaScript', 'Agile', 'TypeScript', 'Java', 'Docker'], sections = True)
+        options = Options(domain_keywords = ['Python', 'JavaScript', 'Agile', 'TypeScript', 'Java', 'Docker'], sections = [Certificate, Education, Experience, Skills, Summary, Volunteering])
 
         resume = Resume(text = resume_text, options = options)
 
