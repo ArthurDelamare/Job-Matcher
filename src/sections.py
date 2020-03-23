@@ -106,6 +106,16 @@ class Skills(Section):
 
     name = 'Skills' # Section title is required by Spacy to use the matcher
 
+    keywords = {
+        'en': ['competencies', 'skills'],
+    }
+
+    @staticmethod
+    def get_pattern(language: str):
+        ''' Pattern to detect the skills header of the skills section '''
+    
+        return [{"LOWER": {"IN" : Skills.keywords[language]}}]
+
     @staticmethod
     def is_header(matcher: Matcher, doc: Doc, i: int, matches: List[tuple]):
         ''' callback when a skills keyword is found: check if the skills keyword is a skills header '''
