@@ -28,6 +28,9 @@ class Certificate(Section):
     def get_pattern(language: str):
         ''' Pattern to detect the certificate header of the education section '''
     
+        if language not in Certificate.keywords:
+            raise Exception('The language code {} is undefined. Correct languages: {}'.format(language, ', '.join(Certificate.keywords.keys())))
+
         return [{"LOWER": {"IN" : Certificate.keywords[language]}}]
 
     @staticmethod
@@ -50,6 +53,9 @@ class Education(Section):
     @staticmethod
     def get_pattern(language: str):
         ''' Pattern to detect the education header of the education section '''
+
+        if language not in Education.keywords:
+            raise Exception('The language code {} is undefined. Correct languages: {}'.format(language, ', '.join(Education.keywords.keys())))
     
         return [{"LOWER": {"IN" : Education.keywords[language]}}]
 
@@ -74,6 +80,9 @@ class Experience(Section):
     def get_pattern(language: str):
         ''' Pattern to detect the experience header of the experience section '''
     
+        if language not in Experience.keywords:
+            raise Exception('The language code {} is undefined. Correct languages: {}'.format(language, ', '.join(Experience.keywords.keys())))
+
         return [{"LOWER": {"IN" : Experience.keywords[language]}}]
 
     @staticmethod
@@ -96,6 +105,9 @@ class Skills(Section):
     @staticmethod
     def get_pattern(language: str):
         ''' Pattern to detect the skills header of the skills section '''
+
+        if language not in Skills.keywords:
+            raise Exception('The language code {} is undefined. Correct languages: {}'.format(language, ', '.join(Skills.keywords.keys())))
     
         return [{"LOWER": {"IN" : Skills.keywords[language]}}]
 
@@ -120,6 +132,9 @@ class Summary(Section):
     def get_pattern(language: str):
         ''' Pattern to detect the summary header of the summary section '''
     
+        if language not in Summary.keywords:
+            raise Exception('The language code {} is undefined. Correct languages: {}'.format(language, ', '.join(Summary.keywords.keys())))
+
         return [{"LOWER": {"IN" : Summary.keywords[language]}}]
 
     @staticmethod
@@ -142,6 +157,9 @@ class Volunteering(Section):
     @staticmethod
     def get_pattern(language: str):
         ''' Pattern to detect the volunteering header of the volunteering section '''
+
+        if language not in Volunteering.keywords:
+            raise Exception('The language code {} is undefined. Correct languages: {}'.format(language, ', '.join(Volunteering.keywords.keys())))
     
         return [{"LOWER": {"IN" : Volunteering.keywords[language]}}]
 
@@ -165,8 +183,11 @@ class Environment(Section):
     @staticmethod
     def get_pattern(language: str):
         ''' Pattern to detect the environment header of the environment section '''
+
+        if language not in Environment.keywords:
+            raise Exception('The language code {} is undefined. Correct languages: {}'.format(language, ', '.join(Environment.keywords.keys())))
     
-        return [{"LOWER": {"IN" : Volunteering.keywords[language]}}]
+        return [{"LOWER": {"IN" : Environment.keywords[language]}}]
 
     @staticmethod
     def is_header(matcher: Matcher, doc: Doc, i: int, matches: List[tuple]):
@@ -188,8 +209,11 @@ class Requirements(Section):
     @staticmethod
     def get_pattern(language: str):
         ''' Pattern to detect the requirements header of the requirements section '''
+
+        if language not in Requirements.keywords:
+            raise Exception('The language code {} is undefined. Correct languages: {}'.format(language, ', '.join(Requirements.keywords.keys())))
     
-        return [{"LOWER": {"IN" : Volunteering.keywords[language]}}]
+        return [{"LOWER": {"IN" : Requirements.keywords[language]}}]
 
     @staticmethod
     def is_header(matcher: Matcher, doc: Doc, i: int, matches: List[tuple]):
@@ -211,8 +235,11 @@ class Technologies(Section):
     @staticmethod
     def get_pattern(language: str):
         ''' Pattern to detect the technologies header of the technologies section '''
+
+        if language not in Technologies.keywords:
+            raise Exception('The language code {} is undefined. Correct languages: {}'.format(language, ', '.join(Technologies.keywords.keys())))
     
-        return [{"LOWER": {"IN" : Volunteering.keywords[language]}}]
+        return [{"LOWER": {"IN" : Technologies.keywords[language]}}]
 
     @staticmethod
     def is_header(matcher: Matcher, doc: Doc, i: int, matches: List[tuple]):
