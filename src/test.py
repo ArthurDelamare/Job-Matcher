@@ -36,6 +36,8 @@ class TestProject(unittest.TestCase):
         self.assertEqual(resume.doc[1].text, 'Name')
         self.assertEqual(resume.keywords['CMS'].text, 'Random CMS Company')
         self.assertEqual(resume.domains_keywords, ['Java', 'Python', 'JavaScript', 'TypeScript'])
+        self.assertEqual(resume.has_section(Volunteering.name.lower()), True)
+        self.assertEqual(resume.has_section(Certificate.name.lower()), False)
 
 if __name__ == "__main__":
     unittest.main()

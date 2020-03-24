@@ -55,3 +55,8 @@ class Resume:
                 domain_keywords.append(keyword)
 
         return domain_keywords
+
+    def has_section(self, section: str):
+        ''' Return True if the section exists in the resume. Otherwise, return False.'''
+
+        return self.sections and section in self.sections

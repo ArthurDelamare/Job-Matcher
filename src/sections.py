@@ -6,6 +6,8 @@ class Section:
 
     name = 'undefined' 
     
+    keywords = {}
+
     @staticmethod
     def get_pattern(language: str):
         ''' Pattern to detect the experience header of the experience section '''
