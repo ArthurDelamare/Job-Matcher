@@ -27,9 +27,24 @@ class Resume:
                 matcher.add(section.name, section.is_header, section.get_pattern(language))
             matcher(self.doc)
 
+            
+            section_list = [] # holds the sections, in order
+
+            # Get the sections, their start and end
             for ent in self.doc.ents:
                 if ent.label_ in [Certificate.name, Education.name, Experience.name, Skills.name, Summary.name, Volunteering.name]:
-                    self.sections[ent.text.lower()] = {'text': ent.text, 'start': ent.start_char, 'end': ent.end_char}
+                    if section_list:
+                        section_list[len(section_list) - 1]['end'] = ent.start_char - 1
+                    section_list.append({'name': ent.text.lower(), 'start': ent.start_char})
+
+            # Save the sections into a dictionary 
+            for index, section in enumerate(section_list):
+                if index != len(section_list) - 1:
+                    self.sections[section['name']] = {'tokens': self.doc[section['start'] : section['end']], 'start': section['start'], 'end': section['end']}
+                else:
+                    self.sections[section['name']] = {'tokens': self.doc[section['start'] :], 'start': section['start'], 'end': len(self.doc.text)}
+
+
 
     def _extract_keywords_from_doc(self) -> dict:
         ''' Extract the keywords from the spacy doc by removing unwanted tokens as punctuations, symbols, spaces... '''
