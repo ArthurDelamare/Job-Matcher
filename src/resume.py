@@ -35,7 +35,7 @@ class Resume:
                 if ent.label_ in [Certificate.name, Education.name, Experience.name, Skills.name, Summary.name, Volunteering.name]:
                     if section_list:
                         section_list[len(section_list) - 1]['end'] = ent.start_char - 1
-                    section_list.append({'name': ent.text.lower(), 'start': ent.start_char})
+                    section_list.append({'name': ent.label_.lower(), 'start': ent.start_char})
 
             # Save the sections into a dictionary 
             for index, section in enumerate(section_list):
