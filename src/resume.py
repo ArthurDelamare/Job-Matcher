@@ -34,15 +34,16 @@ class Resume:
             for ent in self.doc.ents:
                 if ent.label_ in [Certificate.name, Education.name, Experience.name, Skills.name, Summary.name, Volunteering.name]:
                     if section_list:
-                        section_list[len(section_list) - 1]['end'] = ent.start_char - 1
-                    section_list.append({'name': ent.label_.lower(), 'start': ent.start_char})
+                        section_list[len(section_list) - 1]['end'] = ent.start - 1
+                        section_list[len(section_list) - 1]['end_char'] = ent.start_char - 1
+                    section_list.append({'name': ent.label_.lower(), 'start': ent.start, 'start_char': ent.start_char})
 
             # Save the sections into a dictionary 
             for index, section in enumerate(section_list):
                 if index != len(section_list) - 1:
-                    self.sections[section['name']] = {'tokens': self.doc[section['start'] : section['end']], 'start': section['start'], 'end': section['end']}
+                    self.sections[section['name']] = {'tokens': self.doc[section['start'] : section['end']], 'start': section['start'], 'end': section['end'], 'start_char': section['start_char'], 'end_char': section['end_char']}
                 else:
-                    self.sections[section['name']] = {'tokens': self.doc[section['start'] :], 'start': section['start'], 'end': len(self.doc.text)}
+                    self.sections[section['name']] = {'tokens': self.doc[section['start'] :], 'start': section['start'], 'end': len(self.doc), 'start_char': section['start_char'], 'end_char': len(self.doc.text)}
 
 
 
