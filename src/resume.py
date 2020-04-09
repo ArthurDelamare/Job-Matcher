@@ -61,7 +61,7 @@ class Resume:
                     tokens_with_context[token.text] = chunk
         return tokens_with_context
 
-    def _extract_domain_keywords_from_keywords(self):
+    def _extract_domain_keywords_from_keywords(self) -> list:
         ''' Search domain keywords into the keyword list. 
         The domain_keywords list in options determines the keywords that are going to be matched. '''
 
@@ -75,7 +75,7 @@ class Resume:
 
         return domain_keywords
 
-    def has_section(self, section: str):
+    def has_section(self, section: str) -> bool:
         ''' Return True if the section exists in the resume. Otherwise, return False.'''
 
         return self.sections and section in self.sections
