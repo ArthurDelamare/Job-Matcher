@@ -1,4 +1,4 @@
 from .document import Document
 
-class Resume(Document):
+class Position(Document):
     pass
