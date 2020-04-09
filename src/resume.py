@@ -17,9 +17,12 @@ class Resume:
 
         # Get general keywords from doc, as well as the context (the part of sentence it has been detected in)
         self.keywords = self._extract_keywords_from_doc()
+
+        # Get domain keywords if specified in options
         if self.options.domain_keywords:
             self.domains_keywords = self._extract_domain_keywords_from_keywords()
 
+        # Process section detection if specified in options
         if self.options.sections:
             self.sections = {}
             matcher = Matcher(nlp.vocab)
@@ -32,7 +35,7 @@ class Resume:
 
             # Get the sections, their start and end
             for ent in self.doc.ents:
-                if ent.label_ in [Certificate.name, Education.name, Experience.name, Skills.name, Summary.name, Volunteering.name]:
+                if ent.label_ in [section.name for section in self.options.sections]:
                     if section_list:
                         section_list[len(section_list) - 1]['end'] = ent.start - 1
                         section_list[len(section_list) - 1]['end_char'] = ent.start_char - 1
