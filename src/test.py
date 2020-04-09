@@ -1,7 +1,8 @@
 import unittest
 from .options import Options
+from .position import Position
 from .resume import Resume
-from .sections import Certificate, Education, Experience, Skills, Summary, Volunteering
+from .sections import Certificate, Education, Experience, Skills, Summary, Requirements, Responsibilities, Volunteering
 
 
 class TestProject(unittest.TestCase):
@@ -38,6 +39,42 @@ class TestProject(unittest.TestCase):
         self.assertEqual(resume.domains_keywords, ['Java', 'Python', 'JavaScript', 'TypeScript'])
         self.assertEqual(resume.has_section(Volunteering.name.lower()), True)
         self.assertEqual(resume.has_section(Certificate.name.lower()), False)
+
+    def test_init_position(self):
+        position_text = '''
+            We are looking for an enthusiastic Junior Software Developer to join our experienced software design team. You will report directly to the Development Manager and assist with all functions of software coding and design. Your primary focus will be to learn the codebase, gather user data, and respond to requests from senior developers.
+
+            To ensure success as a Junior Software Developer, you should have a good working knowledge of basic programming languages, the ability to learn new technology quickly, and the ability to work in a team environment. Ultimately, a top-class Junior Software Developer provides valuable support to the design team while continually improving their coding and design skills.
+
+            Responsibilities:
+            Assisting the Development Manager with all aspects of software design and coding.
+            Attending and contributing to company development meetings.
+            Learning the codebase and improving your coding skills.
+            Writing and maintaining code.
+            Working on minor bug fixes.
+            Monitoring the technical performance of internal systems.
+            Responding to requests from the development team.
+            Gathering information from consumers about program functionality.
+            Writing reports.
+            Conducting development tests.
+            
+            Requirements:
+            Bachelor's degree in Computer Science.
+            Knowledge of basic coding languages including C++, HTML5, and JavaScript.
+            Basic programming experience.
+            Knowledge of databases and operating systems.
+            Good working knowledge of email systems and Microsoft Office software.
+            Ability to learn new software and technologies quickly.
+            Ability to follow instructions and work in a team environment.
+            Detail-oriented.
+        '''
+
+        options = Options(sections = [Requirements, Responsibilities, Volunteering])
+        position = Position(text = position_text, options = options)
+        self.assertEqual(position.text, position_text)
+        self.assertEqual(position.has_section(Requirements.name.lower()), True)
+        self.assertEqual(position.has_section(Responsibilities.name.lower()), True)
+        self.assertEqual(position.has_section(Volunteering.name.lower()), False)
 
 if __name__ == "__main__":
     unittest.main()
