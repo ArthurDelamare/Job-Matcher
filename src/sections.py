@@ -90,6 +90,14 @@ class Requirements(Section):
         'en': ['requirements'],
     }
 
+class Responsibilities(Section):
+
+    name = 'Responsibilities' # Section title is required by Spacy to use the matcher
+
+    keywords = {
+        'en': ['responsibilities'],
+    }
+
 class Technologies(Section):
 
     name = 'Technologies' # Section title is required by Spacy to use the matcher
