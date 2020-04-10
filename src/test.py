@@ -128,13 +128,19 @@ class TestProject(unittest.TestCase):
             Detail-oriented.
         '''
 
-        resume = Resume(resume_text)
-        position = Position(position_text)
-        matching, missing = resume.compare(position)
-        self.assertEqual('software' in matching.keys(), True)
-        self.assertEqual('react' in matching.keys(), False)
-        self.assertEqual('HTML5' in missing.keys(), True)
-        self.assertEqual('C++' in missing.keys(), True)
+        options = Options(domain_keywords = ['JavaScript', 'C++', 'HTML5'])
+
+        resume = Resume(text = resume_text, options = options)
+        position = Position(text = position_text, options = options)
+        matching_general_keywords, missing_general_keywords = resume.compare_global_keywords(position)
+        self.assertEqual('software' in matching_general_keywords.keys(), True)
+        self.assertEqual('react' in matching_general_keywords.keys(), False)
+        self.assertEqual('HTML5' in missing_general_keywords.keys(), True)
+        self.assertEqual('C++' in missing_general_keywords.keys(), True)
+
+        matching_domain_keywords, missing_domain_keywords = resume.compare_domain_keywords(position)
+        self.assertEqual('JavaScript' in matching_domain_keywords, True)
+        self.assertEqual('C++' in missing_domain_keywords, True)
 
 if __name__ == "__main__":
     unittest.main()
