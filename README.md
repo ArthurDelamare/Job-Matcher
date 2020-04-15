@@ -62,7 +62,7 @@ resume = Resume(text = resume_text, options = options)
 # resume.sections now contains the sections
 ```
 
-To check if a Section exist in a resume or position (the education section for example), use:
+To **check if a Section exist** in a resume or position (the education section for example), use:
 ```python
 resume.has_section('education')
 ```
@@ -78,7 +78,7 @@ List of already defined sections:
 8. Volunteering
 
 #### Create a new section
-In order to create a new section, you need to create a class that extends the Section class.
+In order to **create a new section**, you need to create a **class that extends the Section class**.
 
 Let's say, we want to create a Competition section, here is an example of how to do it:
 
@@ -92,14 +92,14 @@ class Competition(Section):
     }
 ```
 
-Then, you can import it and use it in the options:
+Then, you can **import** it and **use it in the options**:
 ```python
 options = Options(sections = [Competition])
 resume = Resume(text = resume_text, options = options)
 ```
 
 #### Compare keywords of resumes and positions
-It is possible to compare both global and domain specific keywords between a resume and a position.
+It is possible to **compare both global and domain specific keywords** between a resume and a position.
 
 The compare_global_keywords returns two dictionaries meanwhile the compare_domain_keywords method returns two lists.
 
